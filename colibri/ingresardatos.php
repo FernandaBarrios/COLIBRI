@@ -5,7 +5,7 @@
  * Date: 5/6/2017
  * Time: 3:43 PM
  */
-    
+
     //conectar a base de datos
     $server = "localhost";
     $user = "root";
@@ -25,7 +25,7 @@
 
     $insert = "INSERT INTO usuario (Nombre, email, contrasena, pais, telefono) VALUES ('$nombre', '$email', '$contras', '$pais', '$tel')";
 
-    //Ejecucion de query
+    //Ejecucion de Query
     $result = mysqli_query($conexion, $insert)
         or die ("Error insertar al bd");
 

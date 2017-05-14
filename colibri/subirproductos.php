@@ -21,8 +21,6 @@
     $categ = $_POST['Categoria'];
     $precio = $_POST['Precio'];
     $descripcion = $_POST['Descripcion'];
-    $fotos = $_POST['Archivo1'];
-    echo $fotos;
 
     //verify categoria
     $findcateg = "SELECT codcategoria FROM categoria WHERE categoria ='$categ'";
@@ -60,13 +58,17 @@
     $result = mysqli_query($conexion, $insert)
         or die ("Error insertar al bd");
 
+    //insert into estadistica(vistas)
+    $insert4 = "INSERT INTO vistas (codprod, vistas) VALUES ('$codprod', '0')";
+    $result7 = mysqli_query($conexion, $insert4);
+
     //insert image
     $foto = $_FILES["Archivo1"]["name"];
     $ruta = $_FILES["Archivo1"]["tmp_name"];
     $destino = "Images/".$foto;
     copy($ruta, $destino);
 
-    $insert3 = "INSERT INTO fotos (CODPRODUCTO, foto) VALUES ('$codprod', '$destino')";
+    $insert3 = "INSERT INTO fotos (codproducto, codcategoria, foto) VALUES ('$codprod', '$codcateg', '$destino')";
     $result6 = mysqli_query($conexion, $insert3)
         or die ("Error insertar al bd");
 

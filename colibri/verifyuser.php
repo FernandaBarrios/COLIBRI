@@ -22,11 +22,13 @@
 
     //query para ver si existe el email
     $query1 = "SELECT email from usuario where email='$email'";
-    $result1 = mysqli_query($conexion, $query1);
+    echo $query1;
+    $result1 = mysqli_query($conexion,$query1);
 
     //query para ver si la contrasena corresponde con el email
     $query2 = "SELECT contrasena from usuario where email='$email'";
-    $result2 = mysqli_query($conexion, $query2);
+    echo $query2;
+    $result2 = mysqli_query($conexion,$query2);
 
     $row = $result2->fetch_assoc();
     echo "contrasena: " . $row["contrasena"];

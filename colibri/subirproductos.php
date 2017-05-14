@@ -56,14 +56,18 @@
     echo $codmax;
     $codprod = $codmax +1;
 
-    //Insert image
-    $path = '../colibri/Images/';
-    file_put_contents($path, $fotos);
-
     $insert = "INSERT INTO producto (codproducto, precio, descripcion, codcategoria, nombre) VALUES ('$codprod', '$precio', '$descripcion','$codcateg', '$nomprod')";
-
-    //Ejecucion de Query
     $result = mysqli_query($conexion, $insert)
+        or die ("Error insertar al bd");
+
+    //insert image
+    $foto = $_FILES["Archivo1"]["name"];
+    $ruta = $_FILES["Archivo1"]["tmp_name"];
+    $destino = "Images/".$foto;
+    copy($ruta, $destino);
+
+    $insert3 = "INSERT INTO fotos (CODPRODUCTO, foto) VALUES ('$codprod', '$destino')";
+    $result6 = mysqli_query($conexion, $insert3)
         or die ("Error insertar al bd");
 
         //Desconectar
